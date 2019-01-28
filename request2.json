@@ -1,0 +1,15 @@
+{
+    "filter":{
+        "simple_operators":{
+            "match":{
+                "TARGET_CODE":{
+                    "type": "AND",
+                    "values": [
+                        "לב12345",
+                        "1234לב"
+                    ]
+                }
+            }
+        }
+    }
+}

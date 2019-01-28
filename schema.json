@@ -1,0 +1,128 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Occupancy Requests",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "filter"
+     ],
+     "description":"Occupancy Requests (via BlackBox)",
+     "definitions":{
+       "targetCodeString": {
+         "type": ["string", "null"],
+         "minLength":1,
+         "maxLength":9,
+         "description": "Hebrew,English,digits,minus,asterix",
+         "pattern": "^[\u05D0-\u05EAa-zA-Z0-9-*]*$"
+       }
+     },
+     "properties": {
+         "filter": {
+             "description": "filter results",
+             "type": "object",
+             "required": [
+                 "simple_operators"
+             ],
+             "properties": {
+                 "simple_operators": {
+                     "type": "object",
+                     "properties": {
+                         "gte": {
+                             "type": "object",
+                             "required":[
+                                 "END_TIME"
+                             ],
+                             "properties": {
+                                 "END_TIME":{
+                                     "type": "object",
+                                     "required":[
+                                         "type",
+                                         "values"
+                                     ],
+                                     "properties": {
+                                         "type": {
+                                             "type": "string",
+                                             "enum": [
+                                                 "AND",
+                                                 "OR"
+                                             ]
+                                         },
+                                         "values": {
+                                             "type": "array",
+                                             "items": {
+                                                "type": "string",
+                                                "format": "date-time"                                            
+                                             }
+                                         }
+                                     }
+                                 }
+                             }
+                         },
+                         "lte":{
+                            "type": "object",
+                            "required":[
+                                "START_TIME"
+                            ],
+                            "properties": {
+                                "START_TIME":{
+                                    "type": "object",
+                                    "required":[
+                                        "type",
+                                        "values"
+                                    ],
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "enum": [
+                                                "AND",
+                                                "OR"
+                                            ]
+                                        },
+                                        "values": {
+                                            "type": "array",
+                                            "items": {                                                
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                         },
+                         "match": {
+                             "type": "object",
+                             "required":[
+                                 "TARGET_CODE"
+                             ],
+                             "properties": {
+                                 "TARGET_CODE": {
+                                     "type": "object",
+                                     "required":[
+                                         "type",
+                                         "values"
+                                     ],
+                                     "properties": {
+                                         "type": {
+                                             "type": "string",
+                                             "enum": [
+                                                 "AND",
+                                                 "OR"
+                                             ]
+                                         },
+                                         "values":{
+                                             "type": "array",
+                                             "items": {
+                                                 "type": "string",
+                                                 "$ref": "#/definitions/targetCodeString"
+                                             }
+                                         }
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+         }
+     }
+}

@@ -1,0 +1,31 @@
+{
+    "filter":{
+        "simple_operators":{
+            "gte":{
+                "END_TIME":{
+                    "type": "AND",
+                    "values": [
+                        "2019-01-20T04:01:50Z"
+                    ]
+                }
+            },
+            "lte":{
+                "START_TIME":{
+                    "type": "AND",
+                    "values": [
+                        "2019-02-20T04:01:50Z"
+                    ]
+                }
+            },
+            "match":{
+                "TARGET_CODE":{
+                    "type": "AND",
+                    "values": [
+                        "לב12345",
+                        "1234לב"
+                    ]
+                }
+            }
+        }
+    }
+}
